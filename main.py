@@ -168,14 +168,18 @@ def train(inputs, args):
             data = data.to(device, non_blocking=pin_memory)
             
             optimizer.zero_grad()
-            pred = model(data, args.sub_adj)
-          
+            pred,attention = model(data, args.sub_adj)
+            if args.strategy == "SKETC" and args.year==args.begin_year:
+                cluster_scores=torch.from_numpy(np.load('./data/cluster_2011.npy')).to(device,non_blocking=pin_memory).repeat(args.batch_size, axis=0).reshape(-1,args.memory["num_pattern"])
+                attention=attention.reshape(-1,args.memory["num_pattern"])
+                cluster_loss=nn.CrossEntropyLoss(attention,cluster_scores)
             if args.strategy == "incremental" and args.year > args.begin_year:
                 pred, _ = to_dense_batch(pred, batch=data.batch)
                 data.y, _ = to_dense_batch(data.y, batch=data.batch)
                 pred = pred[:, args.mapping, :]
-                data.y = data.y[:, args.mapping, :]
-            loss = lossfunc(data.y, pred, reduction="mean")
+                data.y = data.y[:, args.mapping, :] 
+            pre_loss = lossfunc(data.y, pred, reduction="mean")
+            loss= cluster_loss+pre_loss
             if args.ewc and args.year > args.begin_year:
                 loss += model.compute_consolidation_loss()
             training_loss += float(loss)
