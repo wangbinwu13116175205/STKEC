@@ -21,13 +21,9 @@ class Basic_Model(nn.Module):
         #self.register_buffer('attention', torch.randn(98, 655, 64))
         self.args = args
 
-    def forward(self, data, adj,celue=None):
+    def forward(self, data, adj):
         N = adj.shape[0]
-        if celue!=None:
-            x=data
-            x=x.reshape((-1, N, self.args.gcn["in_channel"]))
-        else:
-            x = data.x.reshape((-1, N, self.args.gcn["in_channel"]))   # [bs, N, feature]
+        x = data.x.reshape((-1, N, self.args.gcn["in_channel"]))   # [bs, N, feature]
         batch=x.shape[0]
         x = F.relu(self.gcn1(x, adj))                              # [bs, N, feature]
         x = x.reshape((-1, 1, self.args.gcn["in_channel"]))    # [bs * N, 1, feature]
