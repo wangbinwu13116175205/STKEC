@@ -9,6 +9,7 @@
     "loss": "mse",
     "activation": "relu",
     "scheduler": "epo",
+    "theta" : 0.005,
     "train": 1,
     "y_len": 12,
     "x_len": 12,
