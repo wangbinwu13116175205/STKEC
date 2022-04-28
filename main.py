@@ -179,7 +179,7 @@ def train(inputs, args):
                 pred = pred[:, args.mapping, :]
                 data.y = data.y[:, args.mapping, :] 
             pre_loss = lossfunc(data.y, pred, reduction="mean")
-            loss= cluster_loss+pre_loss
+            loss= cluster_loss+pre_loss*args.theta
             if args.ewc and args.year > args.begin_year:
                 loss += model.compute_consolidation_loss()
             training_loss += float(loss)
