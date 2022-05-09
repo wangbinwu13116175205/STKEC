@@ -12,7 +12,6 @@ class Basic_Model(nn.Module):
         super(Basic_Model, self).__init__()
         self.dropout = args.dropout
         self.gcn1 = BatchGCNConv(args.gcn["in_channel"], args.gcn["in_channel"], bias=True, gcn=False)
-        #self.gcn2 = BatchGCNConv(args.gcn["hidden_channel"], args.gcn["out_channel"], bias=True, gcn=False)
         self.tcn1 = nn.Conv1d(in_channels=args.tcn["in_channel"], out_channels=args.tcn["out_channel"], kernel_size=args.tcn["kernel_size"], \
             dilation=args.tcn["dilation"], padding=int((args.tcn["kernel_size"]-1)*args.tcn["dilation"]/2))
         self.fc = nn.Linear(args.gcn["out_channel"], args.y_len)
