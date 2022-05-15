@@ -14,6 +14,7 @@ class Basic_Model(nn.Module):
         self.gcn1 = BatchGCNConv(args.gcn["in_channel"], args.gcn["in_channel"], bias=True, gcn=False)
         self.tcn1 = nn.Conv1d(in_channels=args.tcn["in_channel"], out_channels=args.tcn["out_channel"], kernel_size=args.tcn["kernel_size"], \
             dilation=args.tcn["dilation"], padding=int((args.tcn["kernel_size"]-1)*args.tcn["dilation"]/2))
+        self.gcn2 = BatchGCNConv(args.gcn["hidden_channel"], args.gcn["out_channel"], bias=True, gcn=False)
         self.fc = nn.Linear(args.gcn["out_channel"], args.y_len)
         self.memory=Memory(args.memory["num_pattern"],args.gcn["out_channel"],args.memroy["channel"])
         self.activation = nn.GELU()
@@ -29,8 +30,8 @@ class Basic_Model(nn.Module):
 
         x = self.tcn1(x)                                           # [bs * N, 1, feature]
 
-        #x = x.reshape((-1, N, self.args.gcn["hidden_channel"]))    # [bs, N, feature]
-       #x = self.gcn2(x, adj)                                      # [bs, N, feature]
+        x = x.reshape((-1, N, self.args.gcn["hidden_channel"]))    # [bs, N, feature]
+        x = self.gcn2(x, adj)                                      # [bs, N, feature]
         z,attention= self.memory(x)#[bs,n,feature]
         z = x.reshape((-1, self.args.gcn["in_channel"]))+x          # [bs * N, feature]
         x = self.fc(self.activation(z))
