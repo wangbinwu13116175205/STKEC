@@ -1,6 +1,6 @@
 # STKEC
 This is the official code of STKEC, "Knowledge Expansion and Consolidation for Continual Traffic Prediction With Expanding Graphs", which is a contintual traffic prediction framework and published in the journal TITS2023.
-
+This code is based on TrafficStream.
 # Data
 Please download the data from TrafficStream(https://github.com/AprLie/TrafficStream) and follow the same processing method.
 
