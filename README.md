@@ -7,6 +7,9 @@ Please download the data from TrafficStream(https://github.com/AprLie/TrafficStr
 # Runing
 python main.py --conf STKEC.json --gpuid 4
 
+# Requirements
+conda env create -f STKEC.yaml
+
 # Cition
 Please cite our paper if you find it useful:
 
