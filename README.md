@@ -21,6 +21,13 @@ Please cite our paper if you find it useful:
   publisher={IEEE}
 }
 
+# Note
+
+#TODO: Aggregate the day vector of each node, and complete long_pattern=np.load('long_term_path') in line 76 in main.py.
+
+#Influence fucntion is a highly computational (time and memory) processing.
+
+#ToDO: select some nodes with stable patterns to evaluate the effectiveness of knowledge consolidation and select new nodes to to evaluate the effectiveness of knowledge expand.
 
 
 
