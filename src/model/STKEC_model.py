@@ -42,14 +42,11 @@ class Basic_Model(nn.Module):
         
         attention = torch.matmul(x, self.memory.transpose(-1, -2))#B*N,G
         scores=F.softmax(attention,dim=1)
-        #scores=scores.reshape(-1,scores.shape[-1])
-        #scores=F.softmax(-scores,dim=1)
-       # print(scores.shape,self.memory.shape)
+
         z=torch.matmul(attention,self.memory)
         x = x + data.x+z
         x = self.fc(self.activation(x))
-       # x = x.reshape((-1,12))
-       # x = self.fc2(x)
+
         x = F.dropout(x, p=self.dropout, training=self.training)
         return x,scores
 
