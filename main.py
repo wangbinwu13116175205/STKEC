@@ -33,7 +33,7 @@ pin_memory = True
 n_work = 16 
 ###################################################################################
                             #To Do
-          #Aggregate the day vector of each node, and complete long_pattern=np.load('long_term_path').
+          #Aggregate the day vector of each node, and complete long_pattern=np.load('long_term_path'), if you want to use this model on another dataset.
           #Influence fucntion is a highly computational (time and memory) processing. Anyway we report the training time in the paper.
           #select some nodes with stable patterns to evaluate the effectiveness of knowledge consolidation
           #select new nodes to to evaluate the effectiveness of knowledge expand
