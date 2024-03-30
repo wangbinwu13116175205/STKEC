@@ -11,7 +11,7 @@ conda env create -f STKEC.yaml
 # Runing
 python main.py --conf STKEC.json --gpuid 4
 
-# Note
+# TODO
 
 #TODO: Aggregate the day vector of each node, and complete long_pattern=np.load('long_term_path') in line 76 in main.py.
 
