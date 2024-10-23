@@ -13,7 +13,7 @@ python main.py --conf STKEC.json --gpuid 4
 
 # TODO
 
-#TODO: Aggregate the day vector of each node, and complete long_pattern=np.load('long_term_path') in line 76 in main.py.
+#TODO: if you want to use another dataset, please aggregate the day vector of each node, and complete long_pattern=np.load('long_term_path') in line 76 in main.py.
 
 #ToDO: select some nodes with stable patterns to evaluate the effectiveness of knowledge consolidation and select new nodes to to evaluate the effectiveness of knowledge expand.
 
