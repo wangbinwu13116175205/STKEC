@@ -72,7 +72,21 @@ def init(args):
     del info
 
 def long_term_pattern(args):
-    long_pattern=np.load('long_term_path')
+    inputs=inputs['train_x']
+    T=inputs.shape[0]
+    L=args.x_len
+   # N=inputs.shape[2]
+    N=inputs.shape[1]
+    if len(inputs.shape)==4:
+        data=inputs[::12,:,:,0]
+    else:
+        data=inputs[::12,:,:args.x_len]
+    days=data.shape[0]//24
+    L=24*days
+    data23=data[:L,:,:].reshape(-1,288,N)
+    data23=data23.sum(axis=0)
+    long_pattern=data23.transpose(1,0)
+  
     attention,_,_=kcluster(long_pattern,nclusters=args.cluster,dist='u')
     np_attention = np.zeros((len(attention),args.cluster))
     for i in attention:
