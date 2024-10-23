@@ -32,7 +32,7 @@ result = {3:{"mae":{}, "mape":{}, "rmse":{}}, 6:{"mae":{}, "mape":{}, "rmse":{}}
 pin_memory = True
 n_work = 16 
 ###################################################################################
-                            #To Do
+          #To Do
           #If you want to use this model on another dataset, aggregate the day vector of each node, and complete long_pattern=np.load('long_term_path'). 
           #select some nodes with stable patterns to evaluate the effectiveness of knowledge consolidation
           #select new nodes to to evaluate the effectiveness of knowledge expand
